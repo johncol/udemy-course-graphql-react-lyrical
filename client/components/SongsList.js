@@ -1,11 +1,12 @@
 import React from 'react';
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 
-export const SongsList = ({}) => {
-  const songs = [
-    { id: '1', title: 'Perdona' },
-    { id: '2', title: 'Perfect' },
-    { id: '3', title: 'Goodbyt My Lover' }
-  ];
+const SongsList = ({ data: { loading, songs } }) => {
+  if (loading) {
+    return <div>loading..</div>;
+  }
+
   return (
     <ul className="collection">
       {songs.map(song => (
@@ -16,3 +17,16 @@ export const SongsList = ({}) => {
     </ul>
   );
 };
+
+const query = gql`
+  query {
+    songs {
+      id
+      title
+    }
+  }
+`;
+
+const SongsListGraphQL = graphql(query)(SongsList);
+
+export { SongsListGraphQL as SongsList };
