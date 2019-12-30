@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
-import { fetchSongsQuery } from './../queries';
+import { Query } from './../graphql';
 import { Header } from './Header';
 
 const SongsList = ({ data: { loading, songs } }) => {
@@ -33,6 +33,6 @@ const NewSongLink = () => (
   </Link>
 );
 
-const SongsListGraphQL = graphql(fetchSongsQuery)(SongsList);
+const SongsListGraphQL = graphql(Query.fetchSongs)(SongsList);
 
 export { SongsListGraphQL as SongsList };
