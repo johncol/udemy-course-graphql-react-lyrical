@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const fetchSongsQuery = gql`
+export const fetchSongs = gql`
   query {
     songs {
       id
