@@ -1,6 +1,7 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+
+import { fetchSongsQuery } from './../queries';
 
 const SongsList = ({ data: { loading, songs } }) => {
   if (loading) {
@@ -18,15 +19,6 @@ const SongsList = ({ data: { loading, songs } }) => {
   );
 };
 
-const query = gql`
-  query {
-    songs {
-      id
-      title
-    }
-  }
-`;
-
-const SongsListGraphQL = graphql(query)(SongsList);
+const SongsListGraphQL = graphql(fetchSongsQuery)(SongsList);
 
 export { SongsListGraphQL as SongsList };
