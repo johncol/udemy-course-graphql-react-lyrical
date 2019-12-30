@@ -1,11 +1,12 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/react-hooks';
 
-import { Query } from './../graphql';
 import { Header } from './Header';
+import { Query } from './../graphql';
 
-const SongsList = ({ data: { loading, songs } }) => {
+export const SongsList = () => {
+  const { loading, data } = useQuery(Query.fetchSongs);
   if (loading) {
     return <div>loading..</div>;
   }
@@ -16,13 +17,7 @@ const SongsList = ({ data: { loading, songs } }) => {
         <h4>Songs List</h4>
         <NewSongLink />
       </Header>
-      <ul className="collection">
-        {songs.map(song => (
-          <li className="collection-item" key={song.id}>
-            {song.title}
-          </li>
-        ))}
-      </ul>
+      <Songs songs={data.songs} />
     </React.Fragment>
   );
 };
@@ -33,6 +28,12 @@ const NewSongLink = () => (
   </Link>
 );
 
-const SongsListGraphQL = graphql(Query.fetchSongs)(SongsList);
-
-export { SongsListGraphQL as SongsList };
+const Songs = ({ songs }) => (
+  <ul className="collection">
+    {songs.map(song => (
+      <li className="collection-item" key={song.id}>
+        {song.title}
+      </li>
+    ))}
+  </ul>
+);
