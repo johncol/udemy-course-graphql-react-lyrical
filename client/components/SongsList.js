@@ -1,14 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
-import { Header } from './Header';
 import { Query } from './../graphql';
+import { Header } from './Header';
+import { Loading } from './Loading';
 
 export const SongsList = () => {
   const { loading, data } = useQuery(Query.fetchSongs);
   if (loading) {
-    return <div>loading..</div>;
+    return <Loading />;
   }
 
   return (
@@ -28,12 +29,20 @@ const NewSongLink = () => (
   </Link>
 );
 
-const Songs = ({ songs }) => (
-  <ul className="collection">
-    {songs.map(song => (
-      <li className="collection-item" key={song.id}>
-        {song.title}
-      </li>
-    ))}
-  </ul>
-);
+const Songs = ({ songs }) => {
+  const history = useHistory();
+  return (
+    <ul className="collection">
+      {songs.map(song => (
+        <li
+          key={song.id}
+          className="collection-item"
+          style={{ cursor: 'pointer' }}
+          onClick={() => history.push(`/songs/${song.id}`)}
+        >
+          {song.title}
+        </li>
+      ))}
+    </ul>
+  );
+};

@@ -9,6 +9,7 @@ import { HttpLink } from 'apollo-link-http';
 import { App } from './components/App';
 import { SongsList } from './components/SongsList';
 import { CreateSong } from './components/CreateSong';
+import { SongDetail } from './components/SongDetail';
 
 const link = new HttpLink('http://localhost:4000/');
 const cache = new InMemoryCache();
@@ -28,6 +29,10 @@ const Root = () => {
 
             <Route path="/songs/new">
               <CreateSong />
+            </Route>
+
+            <Route path="/songs/:id">
+              <SongDetail />
             </Route>
           </App>
         </Route>
