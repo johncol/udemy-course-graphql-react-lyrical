@@ -24,7 +24,7 @@ export const SongsList = () => {
 };
 
 const NewSongLink = () => (
-  <Link to="/songs/new" className="btn-floating waves-effect waves-light red" title="Add a new Song">
+  <Link to="/new-song" className="btn-floating waves-effect waves-light red" title="Add a new Song">
     <i className="material-icons">add</i>
   </Link>
 );
