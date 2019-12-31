@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, BrowserRouter, Redirect } from 'react-router-dom';
+import { Route, HashRouter } from 'react-router-dom';
 import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -18,12 +18,10 @@ const client = new ApolloClient({ link, cache });
 const Root = () => {
   return (
     <ApolloProvider client={client}>
-      <BrowserRouter>
+      <HashRouter>
         <Route path="/">
           <App>
-            <Redirect exact={true} path="/" to="/songs" />
-
-            <Route exact={true} path="/songs">
+            <Route exact={true} path={['/', '/songs']}>
               <SongsList />
             </Route>
 
@@ -36,7 +34,7 @@ const Root = () => {
             </Route>
           </App>
         </Route>
-      </BrowserRouter>
+      </HashRouter>
     </ApolloProvider>
   );
 };
