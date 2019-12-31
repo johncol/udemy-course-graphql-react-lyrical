@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 
 import { Mutation, Query } from './../graphql';
+import { LinkBackToList } from './LinkBackToList';
 
 export const CreateSong = props => {
   const [title, setTitle] = useState('');
@@ -28,6 +29,7 @@ export const CreateSong = props => {
 
   return (
     <React.Fragment>
+      <LinkBackToList />
       <h4>Add a new Song</h4>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <label htmlFor="title">Title</label>
