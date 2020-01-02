@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { Query } from './../graphql';
 import { Loading } from './Loading';
 import { LinkBackToList } from './LinkBackToList';
+import { CreateLyric } from './CreateLyric';
 
 export const SongDetail = props => {
   const { id } = useParams();
@@ -21,9 +22,14 @@ export const SongDetail = props => {
     <React.Fragment>
       <LinkBackToList />
       <h4>{song.title}</h4>
-      {song.lyrics.map(lyric => (
-        <p key={lyric.id}>{lyric.content}</p>
-      ))}
+      <section>
+        {song.lyrics.map(lyric => (
+          <p key={lyric.id}>{lyric.content}</p>
+        ))}
+      </section>
+      <section style={{ marginTop: 30, paddingTop: 30, borderTop: '1px solid #ddd' }}>
+        <CreateLyric />
+      </section>
     </React.Fragment>
   );
 };
