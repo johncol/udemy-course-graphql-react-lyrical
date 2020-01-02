@@ -23,9 +23,9 @@ export const CreateLyric = () => {
 
   return (
     <form autoComplete="off" onSubmit={handleSubmit}>
-      <h5>Add a new Lyric to this song</h5>
-      <label htmlFor="lyric-content"></label>
-      <input id="lyric-content" value={content} onChange={updateContent} placeholder="Maeai" />
+      <h5>Add a new lyric to this song</h5>
+      <label htmlFor="lyric-content">Lyric content</label>
+      <input id="lyric-content" value={content} onChange={updateContent} />
     </form>
   );
 };
