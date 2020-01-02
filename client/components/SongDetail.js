@@ -6,12 +6,11 @@ import { Query } from './../graphql';
 import { Loading } from './Loading';
 import { LinkBackToList } from './LinkBackToList';
 import { CreateLyric } from './CreateLyric';
+import { LyricsList } from './LyricsList';
 
-export const SongDetail = props => {
+export const SongDetail = () => {
   const { id } = useParams();
-  const { loading, data } = useQuery(Query.fetchSong, {
-    variables: { id }
-  });
+  const { loading, data } = useQuery(Query.fetchSong, { variables: { id } });
 
   if (loading) {
     return <Loading />;
@@ -23,9 +22,7 @@ export const SongDetail = props => {
       <LinkBackToList />
       <h4>{song.title}</h4>
       <section>
-        {song.lyrics.map(lyric => (
-          <p key={lyric.id}>{lyric.content}</p>
-        ))}
+        <LyricsList lyrics={song.lyrics} />
       </section>
       <section style={{ marginTop: 30, paddingTop: 30, borderTop: '1px solid #ddd' }}>
         <CreateLyric />
