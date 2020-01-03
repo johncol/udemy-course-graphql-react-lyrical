@@ -12,7 +12,7 @@ import { CreateSong } from './components/CreateSong';
 import { SongDetail } from './components/SongDetail';
 
 const link = new HttpLink('http://localhost:4000/');
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({ dataIdFromObject: object => object.id });
 const client = new ApolloClient({ link, cache });
 
 const Root = () => {

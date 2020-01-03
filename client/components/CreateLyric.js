@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 
 import { Mutation } from './../graphql/mutations';
-import { Query } from '../graphql';
 
 export const CreateLyric = () => {
   const { id: songId } = useParams();
@@ -14,10 +13,7 @@ export const CreateLyric = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    addLyricToSong({
-      variables: { songId, content },
-      refetchQueries: [{ query: Query.fetchSong, variables: { id: songId } }]
-    });
+    addLyricToSong({ variables: { songId, content } });
     setContent('');
   };
 

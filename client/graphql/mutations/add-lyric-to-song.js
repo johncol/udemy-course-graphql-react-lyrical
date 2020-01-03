@@ -6,6 +6,7 @@ export const addLyricToSong = gql`
       id
       title
       lyrics {
+        id
         content
       }
     }
