@@ -24,7 +24,7 @@ export const SongDetail = () => {
       <section>
         <LyricsList lyrics={song.lyrics} />
       </section>
-      <section style={{ marginTop: 30, paddingTop: 30, borderTop: '1px solid #ddd' }}>
+      <section style={{ marginTop: 40 }}>
         <CreateLyric />
       </section>
     </React.Fragment>
