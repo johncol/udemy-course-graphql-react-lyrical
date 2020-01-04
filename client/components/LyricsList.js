@@ -18,7 +18,15 @@ const LyricItem = ({ lyric: { id, content, likes } }) => {
 
   const likeLyric = () => {
     likeLyricMutation({
-      variables: { id }
+      variables: { id },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        likeLyric: {
+          __typename: 'LyricType',
+          id,
+          likes: likes + 1
+        }
+      }
     });
   };
 
