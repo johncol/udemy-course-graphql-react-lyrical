@@ -1,4 +1,7 @@
 import React from 'react';
+import { useMutation } from '@apollo/react-hooks';
+
+import { Mutation } from './../graphql';
 
 export const LyricsList = ({ lyrics }) => {
   return (
@@ -10,13 +13,24 @@ export const LyricsList = ({ lyrics }) => {
   );
 };
 
-const LyricItem = ({ lyric }) => {
+const LyricItem = ({ lyric: { id, content, likes } }) => {
+  const [likeLyricMutation] = useMutation(Mutation.likeLyric, {});
+
+  const likeLyric = () => {
+    likeLyricMutation({
+      variables: { id }
+    });
+  };
+
   return (
     <li className="collection-item" style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <span>{lyric.content}</span>
-      <i className="material-icons" style={{ cursor: 'pointer' }} onClick={() => console.log('id', lyric.id)}>
-        thumb_up
-      </i>
+      <span>{content}</span>
+      <span style={{ display: 'flex', alignItems: 'center' }}>
+        <span>{likes}</span>
+        <i className="material-icons" style={{ cursor: 'pointer', marginLeft: 10 }} onClick={likeLyric}>
+          thumb_up
+        </i>
+      </span>
     </li>
   );
 };
